@@ -1,13 +1,14 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-expressive-authorization for the canonical source repository
- * @copyright Copyright (c) 2017-2018 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-expressive-authorization/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/mezzio/mezzio-authorization for the canonical source repository
+ * @copyright https://github.com/mezzio/mezzio-authorization/blob/master/COPYRIGHT.md
+ * @license   https://github.com/mezzio/mezzio-authorization/blob/master/LICENSE.md New BSD License
  */
 
 declare(strict_types=1);
 
-namespace Zend\Expressive\Authorization;
+namespace Mezzio\Authorization;
 
 class ConfigProvider
 {
@@ -29,7 +30,7 @@ class ConfigProvider
     {
         return [
             /**
-             * Example using ZendAcl:
+             * Example using LaminasAcl:
              *
              * 'roles' => [
              *     // insert the role with parent (if any)
@@ -47,7 +48,7 @@ class ConfigProvider
              *     // e.g. 'admin' => ['admin.pages']
              * ],
              *
-             * Example using ZendRbac:
+             * Example using LaminasRbac:
              *
              * 'roles' => [
              *     // insert the role with parent (if any)
@@ -69,8 +70,11 @@ class ConfigProvider
         return [
             'aliases' => [
                 // Provide an alias for the AuthorizationInterface based on the adapter you are using.
-                // AuthorizationInterface::class => ZendAcl::class,
-                // AuthorizationInterface::class => ZendRbac::class,
+                // AuthorizationInterface::class => LaminasAcl::class,
+                // AuthorizationInterface::class => LaminasRbac::class,
+
+                // Legacy Zend Framework aliases
+                \Zend\Expressive\Authorization\AuthorizationMiddleware::class => AuthorizationMiddleware::class,
             ],
             'factories' => [
                 AuthorizationMiddleware::class => AuthorizationMiddlewareFactory::class,
