@@ -1,21 +1,22 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-expressive-authorization for the canonical source repository
- * @copyright Copyright (c) 2017 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   https://github.com/zendframework/zend-expressive-authorization/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/mezzio/mezzio-authorization for the canonical source repository
+ * @copyright https://github.com/mezzio/mezzio-authorization/blob/master/COPYRIGHT.md
+ * @license   https://github.com/mezzio/mezzio-authorization/blob/master/LICENSE.md New BSD License
  */
 
-namespace ZendTest\Expressive\Authorization;
+namespace MezzioTest\Authorization;
 
+use Mezzio\Authentication\UserInterface;
+use Mezzio\Authentication\UserRepository\UserTrait;
+use Mezzio\Authorization\AuthorizationInterface;
+use Mezzio\Authorization\AuthorizationMiddleware;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Webimpress\HttpMiddlewareCompatibility\HandlerInterface;
-use Zend\Expressive\Authentication\UserInterface;
-use Zend\Expressive\Authentication\UserRepository\UserTrait;
-use Zend\Expressive\Authorization\AuthorizationInterface;
-use Zend\Expressive\Authorization\AuthorizationMiddleware;
 
 use const Webimpress\HttpMiddlewareCompatibility\HANDLER_METHOD;
 
