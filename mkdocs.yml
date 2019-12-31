@@ -1,10 +1,12 @@
 docs_dir: docs/book
 site_dir: docs/html
 nav:
-    - Home: index.md
-    - Introduction: v1/intro.md
-    - Reference:
-        - 'Authorization adapters': v1/auth-adapter.md
+    - { Home: index.md }
+    - { Introduction: v1/intro.md }
+    - { Reference: [{ 'Authorization adapters': v1/auth-adapter.md }] }
 site_name: mezzio-authorization
 site_description: 'Authorization middleware for Mezzio and PSR-7 applications'
 repo_url: 'https://github.com/mezzio/mezzio-authorization'
+extra:
+    project: Mezzio
+    project_url: 'https://docs.mezzio.dev'
