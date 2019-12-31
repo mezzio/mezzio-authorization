@@ -1,11 +1,12 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-expressive-authorization for the canonical source repository
- * @copyright Copyright (c) 2017 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   https://github.com/zendframework/zend-expressive-authorization/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/mezzio/mezzio-authorization for the canonical source repository
+ * @copyright https://github.com/mezzio/mezzio-authorization/blob/master/COPYRIGHT.md
+ * @license   https://github.com/mezzio/mezzio-authorization/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Expressive\Authorization;
+namespace Mezzio\Authorization;
 
 use Interop\Http\ServerMiddleware\DelegateInterface;
 use Interop\Http\ServerMiddleware\MiddlewareInterface as ServerMiddlewareInterface;
@@ -39,7 +40,7 @@ class AuthorizationMiddleware implements ServerMiddlewareInterface
 
     /**
      * {@inheritDoc}
-     * @todo Use role/identity interface from zend-expressive-authentication once published.
+     * @todo Use role/identity interface from mezzio-authentication once published.
      */
     public function process(ServerRequestInterface $request, DelegateInterface $delegate)
     {

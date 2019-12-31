@@ -1,60 +1,61 @@
 {
-    "name": "zendframework/zend-expressive-authorization",
-    "description": "Authorization middleware for Expressive and PSR-7 applications",
-    "homepage": "https://docs.zendframework.com/zend-expressive-authorization/",
-    "type": "library",
+    "name": "mezzio/mezzio-authorization",
+    "description": "Authorization middleware for Mezzio and PSR-7 applications",
     "license": "BSD-3-Clause",
     "keywords": [
+        "laminas",
+        "mezzio",
         "authorization",
         "middleware",
-        "psr-7",
-        "zend-expressive"
+        "psr-7"
     ],
+    "homepage": "https://mezzio.dev",
+    "support": {
+        "docs": "https://docs.mezzio.dev/mezzio-authorization/",
+        "issues": "https://github.com/mezzio/mezzio-authorization/issues",
+        "source": "https://github.com/mezzio/mezzio-authorization",
+        "rss": "https://github.com/mezzio/mezzio-authorization/releases.atom",
+        "chat": "https://laminas.dev/chat",
+        "forum": "https://discourse.laminas.dev"
+    },
     "config": {
         "sort-packages": true
-    },
-    "support": {
-        "docs": "https://docs.zendframework.com/zend-expressive-authorization/",
-        "issues": "https://github.com/zendframework/zend-expressive-authorization/issues",
-        "source": "https://github.com/zendframework/zend-expressive-authorization",
-        "slack": "https://zendframework-slack.herokuapp.com",
-        "forum": "https://discourse.zendframework.com/c/questions/expressive"
-    },
-    "require": {
-        "http-interop/http-middleware": "^0.4.1",
-        "php": "^7.1",
-        "psr/container": "^1.0",
-        "psr/http-message": "^1.0.1",
-        "zendframework/zend-expressive-router": "^2.1.0"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "^6.0.8",
-        "roave/security-advisories": "dev-master",
-        "zendframework/zend-coding-standard": "~1.0.0"
-    },
-    "conflict": {
-        "container-interop/container-interop": "<1.2.0"
-    },
-    "suggest": {
-        "zendframework/zend-expressive-authorization-acl": "^0.1 || ^1.0; provides a zend-permissions-acl-backed adapter",
-        "zendframework/zend-expressive-authorization-rbac": "^0.1 || ^1.0; provides a zend-permissions-rbac-backed adapter"
     },
     "extra": {
         "branch-alias": {
             "dev-master": "1.0-dev"
         },
-        "zf": {
-            "config-provider": "Zend\\Expressive\\Authorization\\ConfigProvider"
+        "laminas": {
+            "config-provider": "Mezzio\\Authorization\\ConfigProvider"
         }
+    },
+    "require": {
+        "php": "^7.1",
+        "http-interop/http-middleware": "^0.4.1",
+        "laminas/laminas-zendframework-bridge": "^1.0",
+        "mezzio/mezzio-router": "^2.1.0",
+        "psr/container": "^1.0",
+        "psr/http-message": "^1.0.1"
+    },
+    "require-dev": {
+        "laminas/laminas-coding-standard": "~1.0.0",
+        "phpunit/phpunit": "^6.0.8"
+    },
+    "conflict": {
+        "container-interop/container-interop": "<1.2.0"
+    },
+    "suggest": {
+        "mezzio/mezzio-authorization-acl": "^0.1 || ^1.0; provides a laminas-permissions-acl-backed adapter",
+        "mezzio/mezzio-authorization-rbac": "^0.1 || ^1.0; provides a laminas-permissions-rbac-backed adapter"
     },
     "autoload": {
         "psr-4": {
-            "Zend\\Expressive\\Authorization\\": "src/"
+            "Mezzio\\Authorization\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "ZendTest\\Expressive\\Authorization\\": "test/"
+            "MezzioTest\\Authorization\\": "test/"
         }
     },
     "scripts": {
@@ -67,5 +68,8 @@
         "cs-fix": "phpcbf",
         "test": "phpunit --colors=always",
         "test-coverage": "phpunit --coverage-clover clover.xml"
+    },
+    "replace": {
+        "zendframework/zend-expressive-authorization": "self.version"
     }
 }
