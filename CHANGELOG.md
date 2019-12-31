@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- [#16](https://github.com/zendframework/zend-expressive-authorization/pull/16) adds
+- [zendframework/zend-expressive-authorization#16](https://github.com/zendframework/zend-expressive-authorization/pull/16) adds
   support for PSR-15.
 
 ### Changed
@@ -19,8 +19,8 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Removed
 
-- [#16](https://github.com/zendframework/zend-expressive-authorization/pull/16) and
-  [#11](https://github.com/zendframework/zend-expressive-authorization/pull/11)
+- [zendframework/zend-expressive-authorization#16](https://github.com/zendframework/zend-expressive-authorization/pull/16) and
+  [zendframework/zend-expressive-authorization#11](https://github.com/zendframework/zend-expressive-authorization/pull/11)
   remove support for http-interop/http-middleware and
   http-interop/http-server-middleware.
 
@@ -32,22 +32,22 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- [#13](https://github.com/zendframework/zend-expressive-authorization/pull/13) adds
-  a requirement on the zend-expressive-authentication package, v 0.2.0 and up.
+- [zendframework/zend-expressive-authorization#13](https://github.com/zendframework/zend-expressive-authorization/pull/13) adds
+  a requirement on the mezzio-authentication package, v 0.2.0 and up.
 
 ### Changed
 
-- [#13](https://github.com/zendframework/zend-expressive-authorization/pull/13)
+- [zendframework/zend-expressive-authorization#13](https://github.com/zendframework/zend-expressive-authorization/pull/13)
   modifies the `AuthorizationMiddleware` workflow. It now looks for a
-  `Zend\Expressive\Authentication\UserInterface` request parameter that
+  `Mezzio\Authentication\UserInterface` request parameter that
   implements that interface; with none available, it returns a 401 status.
   Additionally, it now uses `UserInterface::getUserRoles()`, which returns an
   array of roles; as such, it loops through each, delegating request processing
   for the first role granted permission.
 
-- [#13](https://github.com/zendframework/zend-expressive-authorization/pull/13)
+- [zendframework/zend-expressive-authorization#13](https://github.com/zendframework/zend-expressive-authorization/pull/13)
   pins to http-interop/http-middleware 0.4.1, as that is the most recent version
-  supported by zend-expressive-authentication.
+  supported by mezzio-authentication.
 
 ### Deprecated
 
@@ -65,7 +65,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- [#8](https://github.com/zendframework/zend-expressive-authorization/pull/8) adds
+- [zendframework/zend-expressive-authorization#8](https://github.com/zendframework/zend-expressive-authorization/pull/8) adds
   support for http-interop/http-middleware 0.5.0 via a polyfill provided by the
   package webimpress/http-middleware-compatibility. Essentially, this means you
   can drop this package into an application targeting either the 0.4.1 or 0.5.0

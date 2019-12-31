@@ -1,23 +1,24 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-expressive-authorization for the canonical source repository
- * @copyright Copyright (c) 2017-2018 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-expressive-authorization/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/mezzio/mezzio-authorization for the canonical source repository
+ * @copyright https://github.com/mezzio/mezzio-authorization/blob/master/COPYRIGHT.md
+ * @license   https://github.com/mezzio/mezzio-authorization/blob/master/LICENSE.md New BSD License
  */
 
 declare(strict_types=1);
 
-namespace ZendTest\Expressive\Authorization;
+namespace MezzioTest\Authorization;
 
+use Mezzio\Authentication\UserInterface;
+use Mezzio\Authentication\UserRepository\UserTrait;
+use Mezzio\Authorization\AuthorizationInterface;
+use Mezzio\Authorization\AuthorizationMiddleware;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use Zend\Expressive\Authentication\UserInterface;
-use Zend\Expressive\Authentication\UserRepository\UserTrait;
-use Zend\Expressive\Authorization\AuthorizationInterface;
-use Zend\Expressive\Authorization\AuthorizationMiddleware;
 
 class AuthorizationMiddlewareTest extends TestCase
 {
