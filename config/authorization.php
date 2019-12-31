@@ -1,8 +1,9 @@
 <?php
+
 /**
  * Returns the configuration for the AuthorizationInterface adapter
  *
- * Example using ZendAcl:
+ * Example using LaminasAcl:
  *
  * 'roles' => [
  *     // insert the role with parent (if any)
@@ -20,7 +21,7 @@
  *     // e.g. 'admin' => ['admin.pages']
  * ]
  *
- * Example using ZendRbac:
+ * Example using LaminasRbac:
  *
  * 'roles' => [
  *     // insert the role with parent (if any)

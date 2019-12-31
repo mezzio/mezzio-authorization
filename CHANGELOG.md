@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- [#8](https://github.com/zendframework/zend-expressive-authorization/pull/8) adds
+- [zendframework/zend-expressive-authorization#8](https://github.com/zendframework/zend-expressive-authorization/pull/8) adds
   support for http-interop/http-middleware 0.5.0 via a polyfill provided by the
   package webimpress/http-middleware-compatibility. Essentially, this means you
   can drop this package into an application targeting either the 0.4.1 or 0.5.0
