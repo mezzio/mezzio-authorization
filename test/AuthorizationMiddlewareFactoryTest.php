@@ -1,24 +1,25 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-expressive-authorization for the canonical source repository
- * @copyright Copyright (c) 2017-2018 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-expressive-authorization/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/mezzio/mezzio-authorization for the canonical source repository
+ * @copyright https://github.com/mezzio/mezzio-authorization/blob/master/COPYRIGHT.md
+ * @license   https://github.com/mezzio/mezzio-authorization/blob/master/LICENSE.md New BSD License
  */
 
 declare(strict_types=1);
 
-namespace ZendTest\Expressive\Authorization;
+namespace MezzioTest\Authorization;
 
+use Mezzio\Authorization\AuthorizationInterface;
+use Mezzio\Authorization\AuthorizationMiddleware;
+use Mezzio\Authorization\AuthorizationMiddlewareFactory;
+use Mezzio\Authorization\Exception;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Prophecy\ObjectProphecy;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
 use ReflectionProperty;
-use Zend\Expressive\Authorization\AuthorizationInterface;
-use Zend\Expressive\Authorization\AuthorizationMiddleware;
-use Zend\Expressive\Authorization\AuthorizationMiddlewareFactory;
-use Zend\Expressive\Authorization\Exception;
 
 class AuthorizationMiddlewareFactoryTest extends TestCase
 {
@@ -58,6 +59,7 @@ class AuthorizationMiddlewareFactoryTest extends TestCase
     public function testFactoryWithoutAuthorization()
     {
         $this->container->has(AuthorizationInterface::class)->willReturn(false);
+        $this->container->has(\Zend\Expressive\Authorization\AuthorizationInterface::class)->willReturn(false);
 
         $this->expectException(Exception\InvalidConfigException::class);
         ($this->factory)($this->container->reveal());
