@@ -71,6 +71,6 @@
         "test-coverage": "phpunit --colors=always --coverage-clover clover.xml"
     },
     "replace": {
-        "zendframework/zend-expressive-authorization": "self.version"
+        "zendframework/zend-expressive-authorization": "^1.0.1"
     }
 }
