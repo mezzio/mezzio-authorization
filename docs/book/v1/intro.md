@@ -61,4 +61,4 @@ We offer two adapters:
   which implements an Access Control List ([ACL](https://en.wikipedia.org/wiki/Access_control_list)).
 
 > If you want to know more about authentication using middleware in PHP,
-> we suggest reading the blog post ["Authorize users using Middleware"](https://getlaminas.org/blog/2017-05-04-authorization-middleware.html).
+> we suggest reading the blog post ["Authorize users using Middleware"](https://framework.zend.com/blog/2017-05-04-authorization-middleware.html).
