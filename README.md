@@ -4,7 +4,7 @@
 [![Coverage Status](https://coveralls.io/repos/github/mezzio/mezzio-authorization/badge.svg?branch=master)](https://coveralls.io/github/mezzio/mezzio-authorization?branch=master)
 
 Laminas-mezzio-authorization provides middleware for [Mezzio](https://github.com/mezzio/mezzio)
-and [PSR-7](http://www.php-fig.org/psr/psr-7/) applications for authorizing
+and [PSR-7](https://www.php-fig.org/psr/psr-7/) applications for authorizing
 specific routes based on [ACL](https://en.wikipedia.org/wiki/Access_control_list)
 or [RBAC](https://en.wikipedia.org/wiki/Role-based_access_control) systems.
 
@@ -19,7 +19,7 @@ $ composer require mezzio/mezzio-authorization
 
 ## Documentation
 
-Documentation is [in the doc tree](doc/book/), and can be compiled using [mkdocs](https://www.mkdocs.org):
+Documentation is [in the doc tree](docs/book/), and can be compiled using [mkdocs](https://www.mkdocs.org):
 
 ```bash
 $ mkdocs build
