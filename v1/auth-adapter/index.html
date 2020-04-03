@@ -271,44 +271,45 @@ to the appropriate service.</p>
 you could select the mezzio-authorization-acl adapter in either of the
 following ways:</p>
 <ul>
-<li>Using an alias:
-  ```php
-  use Mezzio\Authorization\AuthorizationInterface;
-  use Mezzio\Authorization\Acl\LaminasAcl;</li>
+<li>
+<p>Using an alias:
+  <pre class="highlight"><code class="language-php">use Mezzio\Authorization\AuthorizationInterface;
+use Mezzio\Authorization\Acl\LaminasAcl;
+
+return [
+    'dependencies' =&gt; [
+        // Using an alias:
+        'aliases' =&gt; [
+            AuthorizationInterface::class =&gt; LaminasAcl::class,
+        ],
+    ],
+];</code></pre></p>
+</li>
+<li>
+<p>Mapping to a factory:
+  <pre class="highlight"><code class="language-php">use Mezzio\Authorization\AuthorizationInterface;
+use Mezzio\Authorization\Acl\LaminasAclFactory;
+
+return [
+    'dependencies' =&gt; [
+        // Using a factory:
+        'factories' =&gt; [
+            AuthorizationInterface::class =&gt; LaminasAclFactory::class,
+        ],
+    ],
+];</code></pre></p>
+</li>
 </ul>
-<p>return [
-      'dependencies' =&gt; [
-          // Using an alias:
-          'aliases' =&gt; [
-              AuthorizationInterface::class =&gt; LaminasAcl::class,
-          ],
-      ],
-  ];
-  ```</p>
-<ul>
-<li>Mapping to a factory:
-  ```php
-  use Mezzio\Authorization\AuthorizationInterface;
-  use Mezzio\Authorization\Acl\LaminasAclFactory;</li>
-</ul>
-<p>return [
-      'dependencies' =&gt; [
-          // Using a factory:
-          'factories' =&gt; [
-              AuthorizationInterface::class =&gt; LaminasAclFactory::class,
-          ],
-      ],
-  ];
-  ```</p>
 <p>We provide two different adapters.</p>
 <ul>
 <li>The RBAC adapter is provided by <a href="https://github.com/mezzio/mezzio-authorization-rbac">mezzio-authorization-rbac</a>.</li>
 <li>The ACL adapter is provided by <a href="https://github.com/mezzio/mezzio-authorization-acl/">mezzio-authorization-acl</a>.</li>
 </ul>
 <p>Each adapter is installable via <a href="https://getcomposer.org">Composer</a>:</p>
-<pre class=codehilite><code class=language-bash>$ composer require mezzio/mezzio-authorization-rbac
+<pre class="highlight"><code class="language-bash">$ composer require mezzio/mezzio-authorization-rbac
 # or
 $ composer require mezzio/mezzio-authorization-acl</code></pre>
+
 <p>In each adapter, we use the <strong>route name</strong> as the resource. This means you
 can specify if a role is authorized to access a specific HTTP <em>route</em>.
 However, this is just one approach to implementing an authorization system; you
