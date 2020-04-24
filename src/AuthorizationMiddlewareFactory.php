@@ -30,7 +30,9 @@ class AuthorizationMiddlewareFactory
         }
 
         return new AuthorizationMiddleware(
-            $container->has(AuthorizationInterface::class) ? $container->get(AuthorizationInterface::class) : $container->get(\Zend\Expressive\Authorization\AuthorizationInterface::class),
+            $container->has(AuthorizationInterface::class)
+                ? $container->get(AuthorizationInterface::class)
+                : $container->get(\Zend\Expressive\Authorization\AuthorizationInterface::class),
             $container->get(ResponseInterface::class)
         );
     }
