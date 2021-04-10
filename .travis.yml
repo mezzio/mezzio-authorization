@@ -6,7 +6,7 @@ cache:
 
 env:
   global:
-    - COMPOSER_ARGS="--no-interaction"
+    - COMPOSER_ARGS="--no-interaction --ignore-platform-reqs"
     - COVERAGE_DEPS="php-coveralls/php-coveralls"
 
 matrix:
@@ -30,6 +30,18 @@ matrix:
       env:
         - DEPS=lowest
     - php: 7.3
+      env:
+        - DEPS=latest
+    - php: 7.4
+      env:
+        - DEPS=lowest
+    - php: 7.4
+      env:
+        - DEPS=latest
+    - php: 8.0
+      env:
+        - DEPS=lowest
+    - php: 8.0
       env:
         - DEPS=latest
 
