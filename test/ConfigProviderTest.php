@@ -19,7 +19,7 @@ class ConfigProviderTest extends TestCase
     /** @var ConfigProvider */
     private $provider;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->provider = new ConfigProvider();
     }
@@ -36,12 +36,12 @@ class ConfigProviderTest extends TestCase
     {
         $config = ($this->provider)();
 
-        $this->assertInternalType('array', $config);
+        $this->assertIsArray($config);
         $this->assertArrayHasKey('authorization', $config);
-        $this->assertInternalType('array', $config['authorization']);
+        $this->assertIsArray($config['authorization']);
 
         $this->assertArrayHasKey('dependencies', $config);
-        $this->assertInternalType('array', $config['dependencies']);
+        $this->assertIsArray($config['dependencies']);
         $this->assertArrayHasKey('aliases', $config['dependencies']);
         $this->assertArrayHasKey('factories', $config['dependencies']);
     }
