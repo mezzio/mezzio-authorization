@@ -10,6 +10,7 @@ you could select the mezzio-authorization-acl adapter in either of the
 following ways:
 
 - Using an alias:
+  
   ```php
   use Mezzio\Authorization\AuthorizationInterface;
   use Mezzio\Authorization\Acl\LaminasAcl;
@@ -25,6 +26,7 @@ following ways:
   ```
 
 - Mapping to a factory:
+  
   ```php
   use Mezzio\Authorization\AuthorizationInterface;
   use Mezzio\Authorization\Acl\LaminasAclFactory;

@@ -1,6 +1,6 @@
 # Mezzio Authorization middleware
 
-[![Build Status](https://travis-ci.com/mezzio/mezzio-authorization.svg?branch=master)](https://travis-ci.com/mezzio/mezzio-authorization)
+[![Build Status](https://github.com/mezzio/mezzio-authorization/workflows/Continuous%20Integration/badge.svg)](https://github.com/mezzio/mezzio-authorization/actions?query=workflow%3A"Continuous+Integration")
 [![Coverage Status](https://coveralls.io/repos/github/mezzio/mezzio-authorization/badge.svg?branch=master)](https://coveralls.io/github/mezzio/mezzio-authorization?branch=master)
 
 Laminas-mezzio-authorization provides middleware for [Mezzio](https://github.com/mezzio/mezzio)
