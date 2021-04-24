@@ -1,6 +1,6 @@
 # Mezzio Authorization middleware
 
-[![Build Status](https://github.com/mezzio/mezzio-authorization/workflows/continuous-integration.yml/badge.svg)](https://github.com/mezzio/mezzio-authorization/actions/workflows/continuous-integration.yml)
+[![Build Status](https://github.com/mezzio/mezzio-authorization/actions/workflows/continuous-integration.yml/badge.svg)](https://github.com/mezzio/mezzio-authorization/actions/workflows/continuous-integration.yml)
 
 Laminas-mezzio-authorization provides middleware for [Mezzio](https://github.com/mezzio/mezzio)
 and [PSR-7](https://www.php-fig.org/psr/psr-7/) applications for authorizing
