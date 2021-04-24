@@ -1,7 +1,6 @@
 # Mezzio Authorization middleware
 
-[![Build Status](https://travis-ci.com/mezzio/mezzio-authorization.svg?branch=master)](https://travis-ci.com/mezzio/mezzio-authorization)
-[![Coverage Status](https://coveralls.io/repos/github/mezzio/mezzio-authorization/badge.svg?branch=master)](https://coveralls.io/github/mezzio/mezzio-authorization?branch=master)
+[![Build Status](https://github.com/mezzio/mezzio-authorization/workflows/continuous-integration.yml/badge.svg)](https://github.com/mezzio/mezzio-authorization/actions/workflows/continuous-integration.yml)
 
 Laminas-mezzio-authorization provides middleware for [Mezzio](https://github.com/mezzio/mezzio)
 and [PSR-7](https://www.php-fig.org/psr/psr-7/) applications for authorizing
