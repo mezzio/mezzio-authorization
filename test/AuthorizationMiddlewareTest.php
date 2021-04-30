@@ -16,6 +16,7 @@ use Mezzio\Authorization\AuthorizationInterface;
 use Mezzio\Authorization\AuthorizationMiddleware;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Argument;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -23,6 +24,8 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 class AuthorizationMiddlewareTest extends TestCase
 {
+    use ProphecyTrait;
+
     /** @var AuthorizationInterface|ObjectProphecy */
     private $authorization;
 
@@ -38,7 +41,7 @@ class AuthorizationMiddlewareTest extends TestCase
     /** @var callable */
     private $responseFactory;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->authorization = $this->prophesize(AuthorizationInterface::class);
         $this->request = $this->prophesize(ServerRequestInterface::class);
