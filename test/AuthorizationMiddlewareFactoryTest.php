@@ -37,11 +37,11 @@ class AuthorizationMiddlewareFactoryTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->container = $this->prophesize(ContainerInterface::class);
-        $this->factory = new AuthorizationMiddlewareFactory();
-        $this->authorization = $this->prophesize(AuthorizationInterface::class);
+        $this->container         = $this->prophesize(ContainerInterface::class);
+        $this->factory           = new AuthorizationMiddlewareFactory();
+        $this->authorization     = $this->prophesize(AuthorizationInterface::class);
         $this->responsePrototype = $this->prophesize(ResponseInterface::class);
-        $this->responseFactory = function () {
+        $this->responseFactory   = function () {
             return $this->responsePrototype->reveal();
         };
 
@@ -75,7 +75,7 @@ class AuthorizationMiddlewareFactoryTest extends TestCase
     public static function assertResponseFactoryReturns(
         ResponseInterface $expected,
         AuthorizationMiddleware $middleware
-    ) : void {
+    ): void {
         $r = new ReflectionProperty($middleware, 'responseFactory');
         $r->setAccessible(true);
         $responseFactory = $r->getValue($middleware);

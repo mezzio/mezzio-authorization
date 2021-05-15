@@ -12,14 +12,10 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 class AuthorizationMiddleware implements MiddlewareInterface
 {
-    /**
-     * @var AuthorizationInterface
-     */
+    /** @var AuthorizationInterface */
     private $authorization;
 
-    /**
-     * @var callable
-     */
+    /** @var callable */
     private $responseFactory;
 
     public function __construct(AuthorizationInterface $authorization, callable $responseFactory)
@@ -27,7 +23,7 @@ class AuthorizationMiddleware implements MiddlewareInterface
         $this->authorization = $authorization;
 
         // Ensures type safety of the composed factory
-        $this->responseFactory = function () use ($responseFactory) : ResponseInterface {
+        $this->responseFactory = function () use ($responseFactory): ResponseInterface {
             return $responseFactory();
         };
     }
@@ -35,7 +31,7 @@ class AuthorizationMiddleware implements MiddlewareInterface
     /**
      * {@inheritDoc}
      */
-    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler) : ResponseInterface
+    public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         $user = $request->getAttribute(UserInterface::class, false);
         if (! $user instanceof UserInterface) {
