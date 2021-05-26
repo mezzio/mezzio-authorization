@@ -9,7 +9,7 @@ class ConfigProvider
     /**
      * Return the configuration array.
      */
-    public function __invoke() : array
+    public function __invoke(): array
     {
         return [
             'dependencies'  => $this->getDependencies(),
@@ -20,7 +20,7 @@ class ConfigProvider
     /**
      * Returns the configuration for the AuthorizationInterface adapter
      */
-    public function getAuthorizationConfig() : array
+    public function getAuthorizationConfig(): array
     {
         return [
             /**
@@ -59,10 +59,10 @@ class ConfigProvider
     /**
      * Returns the container dependencies
      */
-    public function getDependencies() : array
+    public function getDependencies(): array
     {
         return [
-            'aliases' => [
+            'aliases'   => [
                 // Provide an alias for the AuthorizationInterface based on the adapter you are using.
                 // AuthorizationInterface::class => LaminasAcl::class,
                 // AuthorizationInterface::class => LaminasRbac::class,

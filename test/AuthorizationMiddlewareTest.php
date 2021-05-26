@@ -37,11 +37,11 @@ class AuthorizationMiddlewareTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->authorization = $this->prophesize(AuthorizationInterface::class);
-        $this->request = $this->prophesize(ServerRequestInterface::class);
-        $this->handler = $this->prophesize(RequestHandlerInterface::class);
+        $this->authorization     = $this->prophesize(AuthorizationInterface::class);
+        $this->request           = $this->prophesize(ServerRequestInterface::class);
+        $this->handler           = $this->prophesize(RequestHandlerInterface::class);
         $this->responsePrototype = $this->prophesize(ResponseInterface::class);
-        $this->responseFactory = function () {
+        $this->responseFactory   = function () {
             return $this->responsePrototype->reveal();
         };
     }
@@ -120,7 +120,7 @@ class AuthorizationMiddlewareTest extends TestCase
         $this->assertSame($this->responsePrototype->reveal(), $response);
     }
 
-    private function generateUser(string $identity, array $roles = []) : DefaultUser
+    private function generateUser(string $identity, array $roles = []): DefaultUser
     {
         return new DefaultUser($identity, $roles);
     }

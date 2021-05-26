@@ -11,9 +11,10 @@ use function sprintf;
 
 class AuthorizationMiddlewareFactory
 {
-    public function __invoke(ContainerInterface $container) : AuthorizationMiddleware
+    public function __invoke(ContainerInterface $container): AuthorizationMiddleware
     {
-        if (! $container->has(AuthorizationInterface::class)
+        if (
+            ! $container->has(AuthorizationInterface::class)
             && ! $container->has(\Zend\Expressive\Authorization\AuthorizationInterface::class)
         ) {
             throw new Exception\InvalidConfigException(sprintf(
