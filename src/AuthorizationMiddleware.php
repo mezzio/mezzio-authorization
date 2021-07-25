@@ -5,27 +5,39 @@ declare(strict_types=1);
 namespace Mezzio\Authorization;
 
 use Mezzio\Authentication\UserInterface;
+use Mezzio\Authorization\Response\CallableResponseFactoryDecorator;
+use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
+
+use function is_callable;
 
 class AuthorizationMiddleware implements MiddlewareInterface
 {
     /** @var AuthorizationInterface */
     private $authorization;
 
-    /** @var callable */
+    /** @var ResponseFactoryInterface */
     private $responseFactory;
 
-    public function __construct(AuthorizationInterface $authorization, callable $responseFactory)
+    /**
+     * @param (callable():ResponseInterface)|ResponseFactoryInterface $responseFactory
+     */
+    public function __construct(AuthorizationInterface $authorization, $responseFactory)
     {
         $this->authorization = $authorization;
 
-        // Ensures type safety of the composed factory
-        $this->responseFactory = function () use ($responseFactory): ResponseInterface {
-            return $responseFactory();
-        };
+        if (is_callable($responseFactory)) {
+            // Ensures type safety of the composed factory
+            $responseFactory = new CallableResponseFactoryDecorator(
+                static function () use ($responseFactory): ResponseInterface {
+                    return $responseFactory();
+                }
+            );
+        }
+        $this->responseFactory = $responseFactory;
     }
 
     /**
@@ -35,7 +47,7 @@ class AuthorizationMiddleware implements MiddlewareInterface
     {
         $user = $request->getAttribute(UserInterface::class, false);
         if (! $user instanceof UserInterface) {
-            return ($this->responseFactory)()->withStatus(401);
+            return $this->responseFactory->createResponse(401);
         }
 
         foreach ($user->getRoles() as $role) {
@@ -43,6 +55,15 @@ class AuthorizationMiddleware implements MiddlewareInterface
                 return $handler->handle($request);
             }
         }
-        return ($this->responseFactory)()->withStatus(403);
+
+        return $this->responseFactory->createResponse(403);
+    }
+
+    /**
+     * @internal This should only be used in unit tests.
+     */
+    public function getResponseFactory(): ResponseFactoryInterface
+    {
+        return $this->responseFactory;
     }
 }

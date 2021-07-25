@@ -18,7 +18,7 @@ class ConfigProviderTest extends TestCase
         $this->provider = new ConfigProvider();
     }
 
-    public function testProviderDefinesExpectedFactoryServices()
+    public function testProviderDefinesExpectedFactoryServices(): void
     {
         $config    = $this->provider->getDependencies();
         $factories = $config['factories'];
@@ -26,7 +26,7 @@ class ConfigProviderTest extends TestCase
         $this->assertArrayHasKey(AuthorizationMiddleware::class, $factories);
     }
 
-    public function testInvocationReturnsArrayWithDependencies()
+    public function testInvocationReturnsArrayWithDependencies(): void
     {
         $config = ($this->provider)();
 
