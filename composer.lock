@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ac7c9e7f7e5a2327093dd87e316c1c77",
+    "content-hash": "57919900234cb9fd30edb5099f2c9cc8",
     "packages": [
         {
             "name": "mezzio/mezzio-authentication",
@@ -2801,7 +2801,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": "^7.3 || ~8.0.0 || ~8.1.0"
+        "php": "^7.4 || ~8.0.0 || ~8.1.0"
     },
     "platform-dev": [],
     "plugin-api-version": "2.2.0"
