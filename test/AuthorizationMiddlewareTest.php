@@ -8,28 +8,24 @@ use Mezzio\Authentication\DefaultUser;
 use Mezzio\Authentication\UserInterface;
 use Mezzio\Authorization\AuthorizationInterface;
 use Mezzio\Authorization\AuthorizationMiddleware;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Prophecy\Argument;
-use Prophecy\PhpUnit\ProphecyTrait;
-use Prophecy\Prophecy\ObjectProphecy;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
 class AuthorizationMiddlewareTest extends TestCase
 {
-    use ProphecyTrait;
-
-    /** @var AuthorizationInterface|ObjectProphecy */
+    /** @var AuthorizationInterface&MockObject */
     private $authorization;
 
-    /** @var ServerRequestInterface|ObjectProphecy */
+    /** @var ServerRequestInterface&MockObject */
     private $request;
 
-    /** @var RequestHandlerInterface|ObjectProphecy */
+    /** @var RequestHandlerInterface&MockObject */
     private $handler;
 
-    /** @var ResponseInterface|ObjectProphecy */
+    /** @var ResponseInterface&MockObject */
     private $responsePrototype;
 
     /** @var callable */
@@ -37,87 +33,98 @@ class AuthorizationMiddlewareTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->authorization     = $this->prophesize(AuthorizationInterface::class);
-        $this->request           = $this->prophesize(ServerRequestInterface::class);
-        $this->handler           = $this->prophesize(RequestHandlerInterface::class);
-        $this->responsePrototype = $this->prophesize(ResponseInterface::class);
+        $this->authorization     = $this->createMock(AuthorizationInterface::class);
+        $this->request           = $this->createMock(ServerRequestInterface::class);
+        $this->handler           = $this->createMock(RequestHandlerInterface::class);
+        $this->responsePrototype = $this->createMock(ResponseInterface::class);
         $this->responseFactory   = function () {
-            return $this->responsePrototype->reveal();
+            return $this->responsePrototype;
         };
     }
 
-    public function testConstructor()
-    {
-        $middleware = new AuthorizationMiddleware($this->authorization->reveal(), $this->responseFactory);
-        $this->assertInstanceOf(AuthorizationMiddleware::class, $middleware);
-    }
-
-    public function testProcessWithoutUserAttribute()
-    {
-        $this->request->getAttribute(UserInterface::class, false)->willReturn(false);
-        $this->responsePrototype->withStatus(401)->will([$this->responsePrototype, 'reveal']);
-
-        $this->handler
-            ->handle(Argument::any())
-            ->shouldNotBeCalled();
-
-        $middleware = new AuthorizationMiddleware($this->authorization->reveal(), $this->responseFactory);
-
-        $response = $middleware->process(
-            $this->request->reveal(),
-            $this->handler->reveal()
-        );
-
-        $this->assertSame($this->responsePrototype->reveal(), $response);
-    }
-
-    public function testProcessRoleNotGranted()
+    public function testProcessWithoutUserAttribute(): void
     {
         $this->request
-            ->getAttribute(UserInterface::class, false)
-            ->willReturn($this->generateUser('foo', ['bar']));
+            ->method('getAttribute')
+            ->with(UserInterface::class, false)
+            ->willReturnArgument(1);
+
         $this->responsePrototype
-            ->withStatus(403)
-            ->will([$this->responsePrototype, 'reveal']);
+            ->method('withStatus')
+            ->with(401)
+            ->willReturnSelf();
+
+        $this->handler
+            ->expects(self::never())
+            ->method('handle');
+
+        $middleware = new AuthorizationMiddleware($this->authorization, $this->responseFactory);
+
+        $response = $middleware->process(
+            $this->request,
+            $this->handler
+        );
+
+        self::assertSame($this->responsePrototype, $response);
+    }
+
+    public function testProcessRoleNotGranted(): void
+    {
+        $this->request
+            ->method('getAttribute')
+            ->with(UserInterface::class)
+            ->willReturn($this->generateUser('foo', ['bar']));
+
+        $this->responsePrototype
+            ->method('withStatus')
+            ->with(403)
+            ->willReturnSelf();
+
         $this->authorization
-            ->isGranted('bar', Argument::that([$this->request, 'reveal']))
+            ->method('isGranted')
+            ->with('bar', $this->request)
             ->willReturn(false);
 
         $this->handler
-            ->handle(Argument::any())
-            ->shouldNotBeCalled();
+            ->expects(self::never())
+            ->method('handle');
 
-        $middleware = new AuthorizationMiddleware($this->authorization->reveal(), $this->responseFactory);
+        $middleware = new AuthorizationMiddleware($this->authorization, $this->responseFactory);
 
         $response = $middleware->process(
-            $this->request->reveal(),
-            $this->handler->reveal()
+            $this->request,
+            $this->handler
         );
 
-        $this->assertSame($this->responsePrototype->reveal(), $response);
+        self::assertSame($this->responsePrototype, $response);
     }
 
-    public function testProcessRoleGranted()
+    public function testProcessRoleGranted(): void
     {
         $this->request
-            ->getAttribute(UserInterface::class, false)
+            ->method('getAttribute')
+            ->with(UserInterface::class)
             ->willReturn($this->generateUser('foo', ['bar']));
+
         $this->authorization
-            ->isGranted('bar', Argument::that([$this->request, 'reveal']))
+            ->method('isGranted')
+            ->with('bar', $this->request)
             ->willReturn(true);
 
         $this->handler
-            ->handle(Argument::any())
-            ->will([$this->responsePrototype, 'reveal']);
+            ->expects(self::once())
+            ->method('handle')
+            ->with($this->request)
+            ->willReturn($this->responsePrototype);
 
-        $middleware = new AuthorizationMiddleware($this->authorization->reveal(), $this->responseFactory);
+        $middleware = new AuthorizationMiddleware($this->authorization, $this->responseFactory);
 
         $response = $middleware->process(
-            $this->request->reveal(),
-            $this->handler->reveal()
+            $this->request,
+            $this->handler
         );
 
-        $this->assertSame($this->responsePrototype->reveal(), $response);
+        self::assertSame($this->responsePrototype, $response);
     }
 
     private function generateUser(string $identity, array $roles = []): DefaultUser

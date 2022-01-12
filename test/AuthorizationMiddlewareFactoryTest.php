@@ -8,28 +8,24 @@ use Mezzio\Authorization\AuthorizationInterface;
 use Mezzio\Authorization\AuthorizationMiddleware;
 use Mezzio\Authorization\AuthorizationMiddlewareFactory;
 use Mezzio\Authorization\Exception;
-use PHPUnit\Framework\Assert;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Prophecy\PhpUnit\ProphecyTrait;
-use Prophecy\Prophecy\ObjectProphecy;
 use Psr\Container\ContainerInterface;
+use Psr\Http\Message\ResponseFactoryInterface;
 use Psr\Http\Message\ResponseInterface;
-use ReflectionProperty;
 
 class AuthorizationMiddlewareFactoryTest extends TestCase
 {
-    use ProphecyTrait;
-
-    /** @var ContainerInterface|ObjectProphecy */
+    /** @var ContainerInterface&MockObject */
     private $container;
 
     /** @var AuthorizationMiddlewareFactory */
     private $factory;
 
-    /** @var AuthorizationInterface|ObjectProphecy */
+    /** @var AuthorizationInterface&MockObject */
     private $authorization;
 
-    /** @var ResponseInterface|ObjectProphecy */
+    /** @var ResponseInterface&MockObject */
     private $responsePrototype;
 
     /** @var callable */
@@ -37,48 +33,49 @@ class AuthorizationMiddlewareFactoryTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->container         = $this->prophesize(ContainerInterface::class);
+        $this->container         = $this->createMock(ContainerInterface::class);
         $this->factory           = new AuthorizationMiddlewareFactory();
-        $this->authorization     = $this->prophesize(AuthorizationInterface::class);
-        $this->responsePrototype = $this->prophesize(ResponseInterface::class);
-        $this->responseFactory   = function () {
-            return $this->responsePrototype->reveal();
+        $this->authorization     = $this->createMock(AuthorizationInterface::class);
+        $this->responsePrototype = $this->createMock(ResponseInterface::class);
+        $this->responseFactory   = function (): ResponseInterface {
+            return $this->responsePrototype;
         };
 
         $this->container
-            ->get(AuthorizationInterface::class)
-            ->will([$this->authorization, 'reveal']);
-        $this->container
-            ->get(ResponseInterface::class)
-            ->willReturn($this->responseFactory);
+            ->method('get')
+            ->withConsecutive(
+                [AuthorizationInterface::class],
+                [ResponseInterface::class]
+            )
+            ->willReturnOnConsecutiveCalls($this->authorization, $this->responseFactory);
     }
 
-    public function testFactoryWithoutAuthorization()
+    public function testFactoryWithoutAuthorization(): void
     {
-        $this->container->has(AuthorizationInterface::class)->willReturn(false);
-        $this->container->has(\Zend\Expressive\Authorization\AuthorizationInterface::class)->willReturn(false);
-
         $this->expectException(Exception\InvalidConfigException::class);
-        ($this->factory)($this->container->reveal());
+        ($this->factory)($this->container);
     }
 
-    public function testFactory()
+    public function testFactory(): void
     {
-        $this->container->has(AuthorizationInterface::class)->willReturn(true);
-        $this->container->has(ResponseInterface::class)->willReturn(true);
+        $this->container
+            ->method('has')
+            ->withConsecutive(
+                [AuthorizationInterface::class],
+                [ResponseFactoryInterface::class],
+                [ResponseInterface::class]
+            )
+            ->willReturn(true, false, true);
 
-        $middleware = ($this->factory)($this->container->reveal());
-        $this->assertInstanceOf(AuthorizationMiddleware::class, $middleware);
-        $this->assertResponseFactoryReturns($this->responsePrototype->reveal(), $middleware);
+        $middleware = ($this->factory)($this->container);
+        $this->assertResponseFactoryReturns($this->responsePrototype, $middleware);
     }
 
     public static function assertResponseFactoryReturns(
         ResponseInterface $expected,
         AuthorizationMiddleware $middleware
     ): void {
-        $r = new ReflectionProperty($middleware, 'responseFactory');
-        $r->setAccessible(true);
-        $responseFactory = $r->getValue($middleware);
-        Assert::assertSame($expected, $responseFactory());
+        $responseFactory = $middleware->getResponseFactory();
+        self::assertSame($expected, $responseFactory->getResponseFromCallable());
     }
 }
