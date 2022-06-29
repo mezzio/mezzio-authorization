@@ -44,7 +44,9 @@
         "laminas/laminas-coding-standard": "~2.3.0",
         "phpspec/prophecy": "^v1.15.0",
         "phpspec/prophecy-phpunit": "^2.0",
-        "phpunit/phpunit": "^9.5.11"
+        "phpunit/phpunit": "^9.5.11",
+        "psalm/plugin-phpunit": "^0.17.0",
+        "vimeo/psalm": "^4.24"
     },
     "conflict": {
         "container-interop/container-interop": "<1.2.0",
@@ -72,6 +74,7 @@
         "cs-check": "phpcs",
         "cs-fix": "phpcbf",
         "test": "phpunit --colors=always",
-        "test-coverage": "phpunit --colors=always --coverage-clover clover.xml"
+        "test-coverage": "phpunit --colors=always --coverage-clover clover.xml",
+        "static-analysis": "psalm --shepherd --stats"
     }
 }
