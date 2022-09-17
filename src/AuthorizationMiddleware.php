@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Mezzio\Authorization;
 
 use Mezzio\Authentication\UserInterface;
+use Mezzio\Authorization\AuthorizationInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
@@ -12,8 +13,7 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 class AuthorizationMiddleware implements MiddlewareInterface
 {
-    /** @var AuthorizationInterface */
-    private $authorization;
+    private AuthorizationInterface $authorization;
 
     /** @var callable */
     private $responseFactory;
@@ -23,9 +23,7 @@ class AuthorizationMiddleware implements MiddlewareInterface
         $this->authorization = $authorization;
 
         // Ensures type safety of the composed factory
-        $this->responseFactory = function () use ($responseFactory): ResponseInterface {
-            return $responseFactory();
-        };
+        $this->responseFactory = static fn(): ResponseInterface => $responseFactory();
     }
 
     /**
