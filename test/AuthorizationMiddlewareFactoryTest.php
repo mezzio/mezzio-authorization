@@ -23,8 +23,7 @@ class AuthorizationMiddlewareFactoryTest extends TestCase
     /** @var ContainerInterface|ObjectProphecy */
     private $container;
 
-    /** @var AuthorizationMiddlewareFactory */
-    private $factory;
+    private AuthorizationMiddlewareFactory $factory;
 
     /** @var AuthorizationInterface|ObjectProphecy */
     private $authorization;
@@ -41,9 +40,7 @@ class AuthorizationMiddlewareFactoryTest extends TestCase
         $this->factory           = new AuthorizationMiddlewareFactory();
         $this->authorization     = $this->prophesize(AuthorizationInterface::class);
         $this->responsePrototype = $this->prophesize(ResponseInterface::class);
-        $this->responseFactory   = function () {
-            return $this->responsePrototype->reveal();
-        };
+        $this->responseFactory   = fn() => $this->responsePrototype->reveal();
 
         $this->container
             ->get(AuthorizationInterface::class)
