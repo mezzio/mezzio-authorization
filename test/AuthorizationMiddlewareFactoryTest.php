@@ -9,64 +9,68 @@ use Mezzio\Authorization\AuthorizationMiddleware;
 use Mezzio\Authorization\AuthorizationMiddlewareFactory;
 use Mezzio\Authorization\Exception;
 use PHPUnit\Framework\Assert;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Prophecy\PhpUnit\ProphecyTrait;
-use Prophecy\Prophecy\ObjectProphecy;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
 use ReflectionProperty;
 
 class AuthorizationMiddlewareFactoryTest extends TestCase
 {
-    use ProphecyTrait;
-
-    /** @var ContainerInterface|ObjectProphecy */
-    private $container;
+    /** @var ContainerInterface&MockObject */
+    private ContainerInterface $container;
 
     private AuthorizationMiddlewareFactory $factory;
 
-    /** @var AuthorizationInterface|ObjectProphecy */
-    private $authorization;
+    /** @var AuthorizationInterface&MockObject */
+    private AuthorizationInterface $authorization;
 
-    /** @var ResponseInterface|ObjectProphecy */
-    private $responsePrototype;
+    /** @var ResponseInterface&MockObject */
+    private ResponseInterface $responsePrototype;
 
-    /** @var callable */
+    /** @var callable(): ResponseInterface */
     private $responseFactory;
 
     protected function setUp(): void
     {
-        $this->container         = $this->prophesize(ContainerInterface::class);
+        $this->container         = $this->createMock(ContainerInterface::class);
         $this->factory           = new AuthorizationMiddlewareFactory();
-        $this->authorization     = $this->prophesize(AuthorizationInterface::class);
-        $this->responsePrototype = $this->prophesize(ResponseInterface::class);
-        $this->responseFactory   = fn() => $this->responsePrototype->reveal();
+        $this->authorization     = $this->createMock(AuthorizationInterface::class);
+        $this->responsePrototype = $this->createMock(ResponseInterface::class);
+        $this->responseFactory   = fn() => $this->responsePrototype;
 
         $this->container
-            ->get(AuthorizationInterface::class)
-            ->will([$this->authorization, 'reveal']);
-        $this->container
-            ->get(ResponseInterface::class)
-            ->willReturn($this->responseFactory);
+            ->method('get')
+            ->willReturnMap([
+                [AuthorizationInterface::class, $this->authorization],
+                [ResponseInterface::class, $this->responseFactory],
+            ]);
     }
 
-    public function testFactoryWithoutAuthorization()
+    public function testFactoryWithoutAuthorization(): void
     {
-        $this->container->has(AuthorizationInterface::class)->willReturn(false);
-        $this->container->has(\Zend\Expressive\Authorization\AuthorizationInterface::class)->willReturn(false);
-
+        $this->container->expects(self::exactly(2))
+            ->method('has')
+            ->willReturnMap([
+                [AuthorizationInterface::class, false],
+                ['Zend\Expressive\Authorization\AuthorizationInterface', false],
+            ]);
         $this->expectException(Exception\InvalidConfigException::class);
-        ($this->factory)($this->container->reveal());
+        ($this->factory)($this->container);
     }
 
-    public function testFactory()
+    public function testFactory(): void
     {
-        $this->container->has(AuthorizationInterface::class)->willReturn(true);
-        $this->container->has(ResponseInterface::class)->willReturn(true);
+        $this->container->expects(self::exactly(2))
+            ->method('has')
+            ->willReturnMap([
+                [AuthorizationInterface::class, true],
+                [ResponseInterface::class, true],
+            ]);
 
-        $middleware = ($this->factory)($this->container->reveal());
-        $this->assertInstanceOf(AuthorizationMiddleware::class, $middleware);
-        $this->assertResponseFactoryReturns($this->responsePrototype->reveal(), $middleware);
+        $middleware = ($this->factory)($this->container);
+        self::assertInstanceOf(AuthorizationMiddleware::class, $middleware);
+        self::assertResponseFactoryReturns($this->responsePrototype, $middleware);
     }
 
     public static function assertResponseFactoryReturns(
