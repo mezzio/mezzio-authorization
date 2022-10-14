@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="4.24.0@06dd975cb55d36af80f242561738f16c5f58264f">
+<files psalm-version="4.29.0@7ec5ffbd5f68ae03782d7fd33fff0c45a69f95b3">
   <file src="src/AuthorizationMiddleware.php">
     <MixedInferredReturnType occurrences="2">
       <code>ResponseInterface</code>
@@ -33,113 +33,19 @@
     </UndefinedClass>
   </file>
   <file src="test/AuthorizationMiddlewareFactoryTest.php">
-    <MissingClosureReturnType occurrences="2">
-      <code>fn()</code>
-    </MissingClosureReturnType>
-    <MissingReturnType occurrences="2">
-      <code>testFactory</code>
-      <code>testFactoryWithoutAuthorization</code>
-    </MissingReturnType>
-    <MixedArgument occurrences="4">
-      <code>$this-&gt;container-&gt;reveal()</code>
-      <code>$this-&gt;container-&gt;reveal()</code>
-      <code>$this-&gt;responsePrototype-&gt;reveal()</code>
-      <code>\Zend\Expressive\Authorization\AuthorizationInterface::class</code>
-    </MixedArgument>
+    <MissingClosureReturnType occurrences="1"/>
     <MixedAssignment occurrences="1">
       <code>$responseFactory</code>
     </MixedAssignment>
     <MixedFunctionCall occurrences="1">
       <code>$responseFactory()</code>
     </MixedFunctionCall>
-    <PossiblyInvalidMethodCall occurrences="4">
-      <code>willReturn</code>
-      <code>willReturn</code>
-      <code>willReturn</code>
-      <code>willReturn</code>
-    </PossiblyInvalidMethodCall>
-    <PossiblyUndefinedMethod occurrences="4">
-      <code>reveal</code>
-      <code>reveal</code>
-      <code>reveal</code>
-      <code>reveal</code>
-    </PossiblyUndefinedMethod>
-    <UndefinedClass occurrences="1">
-      <code>\Zend\Expressive\Authorization\AuthorizationInterface</code>
-    </UndefinedClass>
   </file>
   <file src="test/AuthorizationMiddlewareTest.php">
-    <InvalidArgument occurrences="5">
-      <code>Argument::any()</code>
-      <code>Argument::any()</code>
-      <code>Argument::any()</code>
-      <code>Argument::that([$this-&gt;request, 'reveal'])</code>
-      <code>Argument::that([$this-&gt;request, 'reveal'])</code>
-    </InvalidArgument>
-    <MissingClosureReturnType occurrences="2">
-      <code>fn()</code>
-    </MissingClosureReturnType>
-    <MissingReturnType occurrences="4">
-      <code>testConstructor</code>
-      <code>testProcessRoleGranted</code>
-      <code>testProcessRoleNotGranted</code>
-      <code>testProcessWithoutUserAttribute</code>
-    </MissingReturnType>
-    <MixedArgument occurrences="13">
-      <code>$this-&gt;authorization-&gt;reveal()</code>
-      <code>$this-&gt;authorization-&gt;reveal()</code>
-      <code>$this-&gt;authorization-&gt;reveal()</code>
-      <code>$this-&gt;authorization-&gt;reveal()</code>
-      <code>$this-&gt;handler-&gt;reveal()</code>
-      <code>$this-&gt;handler-&gt;reveal()</code>
-      <code>$this-&gt;handler-&gt;reveal()</code>
-      <code>$this-&gt;request-&gt;reveal()</code>
-      <code>$this-&gt;request-&gt;reveal()</code>
-      <code>$this-&gt;request-&gt;reveal()</code>
-      <code>$this-&gt;responsePrototype-&gt;reveal()</code>
-      <code>$this-&gt;responsePrototype-&gt;reveal()</code>
-      <code>$this-&gt;responsePrototype-&gt;reveal()</code>
-    </MixedArgument>
+    <MissingClosureReturnType occurrences="1"/>
     <MixedArgumentTypeCoercion occurrences="1">
       <code>$roles</code>
     </MixedArgumentTypeCoercion>
-    <MixedMethodCall occurrences="3">
-      <code>willReturn</code>
-      <code>willReturn</code>
-      <code>willReturn</code>
-    </MixedMethodCall>
-    <PossiblyInvalidMethodCall occurrences="2">
-      <code>willReturn</code>
-      <code>willReturn</code>
-    </PossiblyInvalidMethodCall>
-    <PossiblyUndefinedMethod occurrences="19">
-      <code>reveal</code>
-      <code>reveal</code>
-      <code>reveal</code>
-      <code>reveal</code>
-      <code>reveal</code>
-      <code>reveal</code>
-      <code>reveal</code>
-      <code>reveal</code>
-      <code>reveal</code>
-      <code>reveal</code>
-      <code>reveal</code>
-      <code>reveal</code>
-      <code>reveal</code>
-      <code>reveal</code>
-      <code>shouldNotBeCalled</code>
-      <code>shouldNotBeCalled</code>
-      <code>will</code>
-      <code>will</code>
-      <code>will</code>
-    </PossiblyUndefinedMethod>
-    <UndefinedMethod occurrences="5">
-      <code>[$this-&gt;request, 'reveal']</code>
-      <code>[$this-&gt;request, 'reveal']</code>
-      <code>[$this-&gt;responsePrototype, 'reveal']</code>
-      <code>[$this-&gt;responsePrototype, 'reveal']</code>
-      <code>[$this-&gt;responsePrototype, 'reveal']</code>
-    </UndefinedMethod>
   </file>
   <file src="test/ConfigProviderTest.php">
     <MissingReturnType occurrences="2">
