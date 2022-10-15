@@ -13,15 +13,11 @@ use Psr\Http\Server\RequestHandlerInterface;
 
 class AuthorizationMiddleware implements MiddlewareInterface
 {
-    private AuthorizationInterface $authorization;
-
     /** @var callable */
     private $responseFactory;
 
-    public function __construct(AuthorizationInterface $authorization, callable $responseFactory)
+    public function __construct(private AuthorizationInterface $authorization, callable $responseFactory)
     {
-        $this->authorization = $authorization;
-
         // Ensures type safety of the composed factory
         $this->responseFactory = static fn(): ResponseInterface => $responseFactory();
     }
