@@ -77,8 +77,7 @@ class AuthorizationMiddlewareFactoryTest extends TestCase
         ResponseInterface $expected,
         AuthorizationMiddleware $middleware
     ): void {
-        $r = new ReflectionProperty($middleware, 'responseFactory');
-        $r->setAccessible(true);
+        $r               = new ReflectionProperty($middleware, 'responseFactory');
         $responseFactory = $r->getValue($middleware);
         Assert::assertSame($expected, $responseFactory());
     }

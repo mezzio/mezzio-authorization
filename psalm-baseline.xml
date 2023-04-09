@@ -1,73 +1,73 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="4.29.0@7ec5ffbd5f68ae03782d7fd33fff0c45a69f95b3">
+<files psalm-version="5.9.0@8b9ad1eb9e8b7d3101f949291da2b9f7767cd163">
   <file src="src/AuthorizationMiddleware.php">
-    <MixedInferredReturnType occurrences="2">
+    <MixedInferredReturnType>
       <code>ResponseInterface</code>
       <code>ResponseInterface</code>
     </MixedInferredReturnType>
-    <MixedMethodCall occurrences="2">
+    <MixedMethodCall>
       <code>withStatus</code>
       <code>withStatus</code>
     </MixedMethodCall>
-    <MixedReturnStatement occurrences="3">
+    <MixedReturnStatement>
       <code>$responseFactory()</code>
-      <code>($this-&gt;responseFactory)()-&gt;withStatus(401)</code>
-      <code>($this-&gt;responseFactory)()-&gt;withStatus(403)</code>
+      <code><![CDATA[($this->responseFactory)()->withStatus(401)]]></code>
+      <code><![CDATA[($this->responseFactory)()->withStatus(403)]]></code>
     </MixedReturnStatement>
   </file>
   <file src="src/AuthorizationMiddlewareFactory.php">
-    <MixedArgument occurrences="4">
-      <code>$container-&gt;get(ResponseInterface::class)</code>
+    <MixedArgument>
+      <code><![CDATA[$container->get(ResponseInterface::class)]]></code>
       <code>\Zend\Expressive\Authorization\AuthorizationInterface::class</code>
       <code>\Zend\Expressive\Authorization\AuthorizationInterface::class</code>
     </MixedArgument>
-    <UndefinedClass occurrences="2">
+    <UndefinedClass>
       <code>\Zend\Expressive\Authorization\AuthorizationInterface</code>
       <code>\Zend\Expressive\Authorization\AuthorizationInterface</code>
     </UndefinedClass>
   </file>
   <file src="src/ConfigProvider.php">
-    <MixedArrayOffset occurrences="1"/>
-    <UndefinedClass occurrences="1">
+    <MixedArrayOffset/>
+    <UndefinedClass>
       <code>\Zend\Expressive\Authorization\AuthorizationMiddleware</code>
     </UndefinedClass>
   </file>
   <file src="test/AuthorizationMiddlewareFactoryTest.php">
-    <MissingClosureReturnType occurrences="1"/>
-    <MixedAssignment occurrences="1">
+    <MissingClosureReturnType/>
+    <MixedAssignment>
       <code>$responseFactory</code>
     </MixedAssignment>
-    <MixedFunctionCall occurrences="1">
+    <MixedFunctionCall>
       <code>$responseFactory()</code>
     </MixedFunctionCall>
   </file>
   <file src="test/AuthorizationMiddlewareTest.php">
-    <MissingClosureReturnType occurrences="1"/>
-    <MixedArgumentTypeCoercion occurrences="1">
+    <MissingClosureReturnType/>
+    <MixedArgumentTypeCoercion>
       <code>$roles</code>
     </MixedArgumentTypeCoercion>
   </file>
   <file src="test/ConfigProviderTest.php">
-    <MissingReturnType occurrences="2">
+    <MissingReturnType>
       <code>testInvocationReturnsArrayWithDependencies</code>
       <code>testProviderDefinesExpectedFactoryServices</code>
     </MissingReturnType>
-    <MixedArgument occurrences="1">
+    <MixedArgument>
       <code>$factories</code>
     </MixedArgument>
-    <MixedAssignment occurrences="1">
+    <MixedAssignment>
       <code>$factories</code>
     </MixedAssignment>
-    <RedundantCondition occurrences="1">
+    <RedundantCondition>
       <code>assertIsArray</code>
     </RedundantCondition>
   </file>
   <file src="test/ExceptionTest.php">
-    <MixedInferredReturnType occurrences="1">
+    <MixedInferredReturnType>
       <code>Generator</code>
     </MixedInferredReturnType>
-    <PossiblyFalseOperand occurrences="1">
-      <code>strrpos(ExceptionInterface::class, '\\')</code>
+    <PossiblyFalseOperand>
+      <code><![CDATA[strrpos(ExceptionInterface::class, '\\')]]></code>
     </PossiblyFalseOperand>
   </file>
 </files>
