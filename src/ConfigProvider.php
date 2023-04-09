@@ -68,7 +68,7 @@ class ConfigProvider
                 // AuthorizationInterface::class => LaminasRbac::class,
 
                 // Legacy Zend Framework aliases
-                \Zend\Expressive\Authorization\AuthorizationMiddleware::class => AuthorizationMiddleware::class,
+                'Zend\Expressive\Authorization\AuthorizationMiddleware' => AuthorizationMiddleware::class,
             ],
             'factories' => [
                 AuthorizationMiddleware::class => AuthorizationMiddlewareFactory::class,

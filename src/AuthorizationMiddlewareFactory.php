@@ -7,6 +7,7 @@ namespace Mezzio\Authorization;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
 
+use function assert;
 use function sprintf;
 
 class AuthorizationMiddlewareFactory
@@ -15,7 +16,7 @@ class AuthorizationMiddlewareFactory
     {
         if (
             ! $container->has(AuthorizationInterface::class)
-            && ! $container->has(\Zend\Expressive\Authorization\AuthorizationInterface::class)
+            && ! $container->has('Zend\Expressive\Authorization\AuthorizationInterface')
         ) {
             throw new Exception\InvalidConfigException(sprintf(
                 'Cannot create %s service; dependency %s is missing',
@@ -24,10 +25,13 @@ class AuthorizationMiddlewareFactory
             ));
         }
 
+        $authorization = $container->has(AuthorizationInterface::class)
+            ? $container->get(AuthorizationInterface::class)
+            : $container->get('Zend\Expressive\Authorization\AuthorizationInterface');
+        assert($authorization instanceof AuthorizationInterface);
+
         return new AuthorizationMiddleware(
-            $container->has(AuthorizationInterface::class)
-                ? $container->get(AuthorizationInterface::class)
-                : $container->get(\Zend\Expressive\Authorization\AuthorizationInterface::class),
+            $authorization,
             $container->get(ResponseInterface::class)
         );
     }

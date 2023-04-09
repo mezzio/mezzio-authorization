@@ -18,22 +18,9 @@
   <file src="src/AuthorizationMiddlewareFactory.php">
     <MixedArgument>
       <code><![CDATA[$container->get(ResponseInterface::class)]]></code>
-      <code>\Zend\Expressive\Authorization\AuthorizationInterface::class</code>
-      <code>\Zend\Expressive\Authorization\AuthorizationInterface::class</code>
     </MixedArgument>
-    <UndefinedClass>
-      <code>\Zend\Expressive\Authorization\AuthorizationInterface</code>
-      <code>\Zend\Expressive\Authorization\AuthorizationInterface</code>
-    </UndefinedClass>
-  </file>
-  <file src="src/ConfigProvider.php">
-    <MixedArrayOffset/>
-    <UndefinedClass>
-      <code>\Zend\Expressive\Authorization\AuthorizationMiddleware</code>
-    </UndefinedClass>
   </file>
   <file src="test/AuthorizationMiddlewareFactoryTest.php">
-    <MissingClosureReturnType/>
     <MixedAssignment>
       <code>$responseFactory</code>
     </MixedAssignment>
@@ -42,7 +29,6 @@
     </MixedFunctionCall>
   </file>
   <file src="test/AuthorizationMiddlewareTest.php">
-    <MissingClosureReturnType/>
     <MixedArgumentTypeCoercion>
       <code>$roles</code>
     </MixedArgumentTypeCoercion>

@@ -37,7 +37,7 @@ class AuthorizationMiddlewareFactoryTest extends TestCase
         $this->factory           = new AuthorizationMiddlewareFactory();
         $this->authorization     = $this->createMock(AuthorizationInterface::class);
         $this->responsePrototype = $this->createMock(ResponseInterface::class);
-        $this->responseFactory   = fn() => $this->responsePrototype;
+        $this->responseFactory   = fn(): ResponseInterface => $this->responsePrototype;
 
         $this->container
             ->method('get')
