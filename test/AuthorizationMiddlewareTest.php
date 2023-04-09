@@ -37,7 +37,7 @@ class AuthorizationMiddlewareTest extends TestCase
         $this->request           = $this->createMock(ServerRequestInterface::class);
         $this->handler           = $this->createMock(RequestHandlerInterface::class);
         $this->responsePrototype = $this->createMock(ResponseInterface::class);
-        $this->responseFactory   = fn() => $this->responsePrototype;
+        $this->responseFactory   = fn(): ResponseInterface => $this->responsePrototype;
     }
 
     public function testConstructor(): void
