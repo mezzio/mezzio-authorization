@@ -4,33 +4,27 @@ declare(strict_types=1);
 
 namespace MezzioTest\Authorization;
 
-use Generator;
 use Mezzio\Authorization\Exception\ExceptionInterface;
+use Mezzio\Authorization\Exception\InvalidConfigException;
+use Mezzio\Authorization\Exception\RuntimeException;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
+use Throwable;
 
-use function basename;
-use function glob;
 use function is_a;
-use function strrpos;
-use function substr;
 
 class ExceptionTest extends TestCase
 {
-    public function exception(): Generator
+    /** @return array<array-key, array{0: class-string<Throwable>}> */
+    public static function exception(): array
     {
-        $namespace = substr(ExceptionInterface::class, 0, strrpos(ExceptionInterface::class, '\\') + 1);
-
-        $exceptions = glob(__DIR__ . '/../src/Exception/*.php');
-        foreach ($exceptions as $exception) {
-            $class = substr(basename($exception), 0, -4);
-
-            yield $class => [$namespace . $class];
-        }
+        return [
+            [InvalidConfigException::class],
+            [RuntimeException::class],
+        ];
     }
 
-    /**
-     * @dataProvider exception
-     */
+    #[DataProvider('exception')]
     public function testExceptionIsInstanceOfExceptionInterface(string $exception): void
     {
         self::assertStringContainsString('Exception', $exception);

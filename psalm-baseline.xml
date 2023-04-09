@@ -49,11 +49,8 @@
     </RedundantCondition>
   </file>
   <file src="test/ExceptionTest.php">
-    <MixedInferredReturnType>
-      <code>Generator</code>
-    </MixedInferredReturnType>
-    <PossiblyFalseOperand>
-      <code><![CDATA[strrpos(ExceptionInterface::class, '\\')]]></code>
-    </PossiblyFalseOperand>
+    <PossiblyUnusedMethod>
+      <code>exception</code>
+    </PossiblyUnusedMethod>
   </file>
 </files>
