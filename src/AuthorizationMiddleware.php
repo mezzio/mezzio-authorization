@@ -16,7 +16,7 @@ class AuthorizationMiddleware implements MiddlewareInterface
     /** @var callable */
     private $responseFactory;
 
-    public function __construct(private AuthorizationInterface $authorization, callable $responseFactory)
+    public function __construct(private readonly AuthorizationInterface $authorization, callable $responseFactory)
     {
         // Ensures type safety of the composed factory
         $this->responseFactory = static fn(): ResponseInterface => $responseFactory();
