@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Mezzio\Authorization;
 
+/** @final */
 class ConfigProvider
 {
     /**
