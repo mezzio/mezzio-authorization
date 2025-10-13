@@ -8,7 +8,7 @@ use Mezzio\Authorization\AuthorizationMiddleware;
 use Mezzio\Authorization\ConfigProvider;
 use PHPUnit\Framework\TestCase;
 
-class ConfigProviderTest extends TestCase
+final class ConfigProviderTest extends TestCase
 {
     private ConfigProvider $provider;
 

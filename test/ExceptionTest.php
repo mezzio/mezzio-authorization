@@ -13,7 +13,7 @@ use Throwable;
 
 use function is_a;
 
-class ExceptionTest extends TestCase
+final class ExceptionTest extends TestCase
 {
     /** @return array<array-key, array{0: class-string<Throwable>}> */
     public static function exception(): array

@@ -15,7 +15,7 @@ use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface;
 use ReflectionProperty;
 
-class AuthorizationMiddlewareFactoryTest extends TestCase
+final class AuthorizationMiddlewareFactoryTest extends TestCase
 {
     /** @var ContainerInterface&MockObject */
     private ContainerInterface $container;

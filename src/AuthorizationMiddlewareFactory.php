@@ -10,6 +10,11 @@ use Psr\Http\Message\ResponseInterface;
 use function assert;
 use function sprintf;
 
+/**
+ * @final
+ * @psalm-internal Mezzio\Authorization
+ * @psalm-internal MezzioTest\Authorization
+ */
 class AuthorizationMiddlewareFactory
 {
     public function __invoke(ContainerInterface $container): AuthorizationMiddleware

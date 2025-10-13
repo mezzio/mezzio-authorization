@@ -5,12 +5,12 @@ declare(strict_types=1);
 namespace Mezzio\Authorization;
 
 use Mezzio\Authentication\UserInterface;
-use Mezzio\Authorization\AuthorizationInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
+/** @final */
 class AuthorizationMiddleware implements MiddlewareInterface
 {
     /** @var callable */

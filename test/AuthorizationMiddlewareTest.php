@@ -14,7 +14,7 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\RequestHandlerInterface;
 
-class AuthorizationMiddlewareTest extends TestCase
+final class AuthorizationMiddlewareTest extends TestCase
 {
     /** @var AuthorizationInterface&MockObject */
     private AuthorizationInterface $authorization;

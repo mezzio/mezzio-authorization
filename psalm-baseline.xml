@@ -1,16 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="5.9.0@8b9ad1eb9e8b7d3101f949291da2b9f7767cd163">
+<files psalm-version="6.13.1@1e3b7f0a8ab32b23197b91107adc0a7ed8a05b51">
   <file src="src/AuthorizationMiddleware.php">
-    <MixedInferredReturnType>
-      <code>ResponseInterface</code>
-      <code>ResponseInterface</code>
-    </MixedInferredReturnType>
     <MixedMethodCall>
-      <code>withStatus</code>
-      <code>withStatus</code>
+      <code><![CDATA[withStatus]]></code>
+      <code><![CDATA[withStatus]]></code>
     </MixedMethodCall>
     <MixedReturnStatement>
-      <code>$responseFactory()</code>
+      <code><![CDATA[$responseFactory()]]></code>
       <code><![CDATA[($this->responseFactory)()->withStatus(401)]]></code>
       <code><![CDATA[($this->responseFactory)()->withStatus(403)]]></code>
     </MixedReturnStatement>
@@ -22,35 +18,30 @@
   </file>
   <file src="test/AuthorizationMiddlewareFactoryTest.php">
     <MixedAssignment>
-      <code>$responseFactory</code>
+      <code><![CDATA[$responseFactory]]></code>
     </MixedAssignment>
     <MixedFunctionCall>
-      <code>$responseFactory()</code>
+      <code><![CDATA[$responseFactory()]]></code>
     </MixedFunctionCall>
   </file>
   <file src="test/AuthorizationMiddlewareTest.php">
     <MixedArgumentTypeCoercion>
-      <code>$roles</code>
+      <code><![CDATA[$roles]]></code>
     </MixedArgumentTypeCoercion>
   </file>
   <file src="test/ConfigProviderTest.php">
     <MissingReturnType>
-      <code>testInvocationReturnsArrayWithDependencies</code>
-      <code>testProviderDefinesExpectedFactoryServices</code>
+      <code><![CDATA[testInvocationReturnsArrayWithDependencies]]></code>
+      <code><![CDATA[testProviderDefinesExpectedFactoryServices]]></code>
     </MissingReturnType>
     <MixedArgument>
-      <code>$factories</code>
+      <code><![CDATA[$factories]]></code>
     </MixedArgument>
     <MixedAssignment>
-      <code>$factories</code>
+      <code><![CDATA[$factories]]></code>
     </MixedAssignment>
     <RedundantCondition>
-      <code>assertIsArray</code>
+      <code><![CDATA[assertIsArray]]></code>
     </RedundantCondition>
-  </file>
-  <file src="test/ExceptionTest.php">
-    <PossiblyUnusedMethod>
-      <code>exception</code>
-    </PossiblyUnusedMethod>
   </file>
 </files>
